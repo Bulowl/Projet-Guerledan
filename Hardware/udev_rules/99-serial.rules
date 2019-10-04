@@ -1,0 +1,3 @@
+#SUBSYSTEM=="tty", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", ATTRS{serial}=="FTHCJLV3", MODE="0666", SYMLINK+="imu"
+#SUBSYSTEM=="tty", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", ATTRS{serial}=="FTHCJLZH", MODE="0666", SYMLINK+="gps"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", ATTRS{serial}=="FT0PX8MO", MODE="0666", SYMLINK+="sonar"
