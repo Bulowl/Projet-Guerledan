@@ -1,0 +1,23 @@
+waypointMgr:
+  waypoint_radius : 50           # meters (first waypoint)
+  waypoint_distance : 10         # meters (all other waypoints)
+
+kalman:
+  loop_rate : 100.               # Hz
+  # Gamma_alpha ---------------
+  sigma_speed_over_water : 0.000001
+  sigma_currents : 0.000001
+  # Gamma_beta ----------------
+  sigma_gps_vel : 0.2
+  # Gamma ---------------------
+  initial_covariance : 100.
+
+lineFollowing:
+  loop_rate : 10.               # Hz
+  max_distance_from_line : 10.  # meters
+  proportional_gain : 0.7       # P
+  motor_angle_bias : 0.         # degrees
+  regulator_type : 2            # 1) Arctan, 2) Tanh + Currents
+
+ekf:
+  magnetic_declination : 0.     # degrees

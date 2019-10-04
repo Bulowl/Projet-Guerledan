@@ -1,0 +1,31 @@
+#! /usr/bin/env python
+
+# Software License Agreement (BSD License)
+#
+# Copyright (c) 2013, Guilherme Franco
+# All rights reserved.
+#
+import serial
+import rospy
+from nmea_msgs.msg import Sentence
+
+def nmeaSentenceCallback(data):
+    if data.sentence != "":
+        if (data.sentence.split(",")[0] in protocols) or protocols[0] == "":
+            print("Sending: " + data.sentence)
+            GPS.write(data.sentence + "\r\n") # nmea_sentence is supposed to be stripped...
+
+if __name__ == '__main__':
+    rospy.init_node('nmea_topic_virtual_serial_writer')
+
+    serial_port = rospy.get_param('~port','/dev/ttyUSB0')
+    serial_baud = rospy.get_param('~baud',4800)
+    protocols = rospy.get_param('~protocols','').split(",")
+
+    try:
+        GPS = serial.Serial(port=serial_port, baudrate=serial_baud, rtscts=True, dsrdtr=True)
+        nmea_sub = rospy.Subscriber("nmea_sentence", Sentence, nmeaSentenceCallback)
+        rospy.spin()
+
+    except rospy.ROSInterruptException:
+        GPS.close() #Close GPS serial port

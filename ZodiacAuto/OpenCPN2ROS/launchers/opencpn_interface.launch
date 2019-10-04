@@ -1,0 +1,28 @@
+<launch>
+  <node pkg="opencpn2ros" type="nmea_topic_virtual_serial_reader" name="nmea_topic_virtual_serial_reader" respawn="true" respawn_delay="2">
+    <param name="port" value="/dev/ttyVUSB1" />
+    <param name="baud" value="4800" />
+  </node>
+  <node pkg="opencpn2ros" type="nmea_topic_virtual_serial_writer" name="nmea_topic_virtual_serial_writer" respawn="true" respawn_delay="2">
+    <!-- <param name="port" value="/dev/ttyVUSB2" /> -->
+    <param name="port" value="/dev/ttyVUSB1" />
+    <param name="baud" value="4800" />
+    <!-- <param name="protocols" value="$GPGGA,$GPHDT" /> -->
+  </node>
+
+  <node pkg="opencpn2ros" type="fake_gps.py" name="fake_gps" respawn="true" respawn_delay="2">
+    <param name="rate" value="1" />
+  </node>
+  <node pkg="opencpn2ros" type="fake_compass.py" name="fake_compass" respawn="true" respawn_delay="2">
+    <param name="rate" value="1" />
+  </node>
+  <node pkg="opencpn2ros" type="fake_sounder.py" name="fake_sounder" respawn="true" respawn_delay="2">
+    <param name="rate" value="1" />
+  </node>
+  <node pkg="opencpn2ros" type="fake_rudder.py" name="fake_rudder" respawn="true" respawn_delay="2">
+    <param name="rate" value="1" />
+  </node>
+
+  <!-- <node pkg="opencpn2ros" type="opencpn2ros.py" name="opencpn2ros"/> -->
+  <node pkg="opencpn2ros" type="waypointListInterface" name="waypointListInterface" output="screen" respawn="true" respawn_delay="2" />
+</launch>
